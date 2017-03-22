@@ -26,6 +26,7 @@ asynchronous examples.
 #### Run the Producer for the `MessageListener` Example ####
 
     $ cd ./async/message-listener-adapter
+    $ mvn clean compile
     $ mvn -Pproducer exec:java
 
 #### Run the Consumer for the `MessageListener` Example ####
