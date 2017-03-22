@@ -12,7 +12,7 @@ All of the examples for asynchronous message consumption utilize the Spring
 Spring JMS supports three types of message listeners including: 
 * [javax.jms.MessageListener](http://download.oracle.com/javaee/5/api/javax/jms/MessageListener.html)
 * [SessionAwareMessageListener](http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/jms/listener/SessionAwareMessageListener.html)
-* [MessageListenerAdapter](http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/jms/listener/adapter/MessageListenerAdapter.html
+* [MessageListenerAdapter](http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/jms/listener/adapter/MessageListenerAdapter.html)
 
 These three types of message listeners are all demonstrated using examples in
 the async directory. 
@@ -23,6 +23,14 @@ consumer should be run in one terminal and the producer should be run in a
 separate terminal. Below are examples of running each of the three
 asynchronous examples. 
 
+#### Environment Setup ####
+1. Maven
+2. Apache ActiveMQ
+3. HAWTIO (optional)
+
+#### Set up Queue for ActiveMQ in HAWTIO ####
+After you run ActiveMQ, you should connect HAWTIO to it. It has a nice web interface to manage remote queues in ActiveMQ. Then log in and open the page for your local ActiveMQ. On that page, you can find localhost>Queue. Open it up and create a new one (TEST.FOO in this example).
+
 #### Run the Producer for the `MessageListener` Example ####
 
     $ cd ./async/message-listener-adapter
@@ -32,16 +40,19 @@ asynchronous examples.
 #### Run the Consumer for the `MessageListener` Example ####
 
     $ cd ./async/message-listener-adapter
+    $ mvn clean compile
     $ mvn -Pconsumer exec:java
 
 #### Run the Producer for the `SessionAwareMessageListener` Example ####
 
     $ cd ./async/message-listener-adapter
+    $ mvn clean compile
     $ mvn -Pproducer exec:java
 
 #### Run the Consumer for the `SessionAwareMessageListener` Example ####
 
     $ cd ./async/message-listener-adapter
+    $ mvn clean compile
     $ mvn -Pconsumer exec:java
 
 #### Run the Producer for the `MessageListenerAdapter` Example ####
@@ -51,6 +62,7 @@ should be either FOO.TEST or FOO.TEST2. The message type should text, bytes,
 map or object. Below is an example of text: 
 
     $ cd ./async/message-listener-adapter
+    $ mvn clean compile
     $ mvn -Pproducer exec:java -Dexec.args="FOO.TEST2 text"
 
 These arguments allow you to invoke one of two `MessageListenerAdapter`
@@ -59,6 +71,7 @@ examples and to send four different types of messages.
 #### Run the Consumer for the `MessageListenerAdapter` Example ####
 
     $ cd ./async/message-listener-adapter
+    $ mvn clean compile
     $ mvn -Pconsumer exec:java
 
 
@@ -75,6 +88,7 @@ separate terminal. Below is an example of running the synchronous example.
 #### Run the Consumer for the `JmsTemplate` Example ####
 
     $ cd ./sync/jms-template
+    $ mvn clean compile
     $ mvn -Pconsumer exec:java 
 
 #### Run the Producer for the `JmsTemplate` Example ####
@@ -83,6 +97,7 @@ convertAndSend and also a jmsSend. These two types are specified using an
 argument when starting up the producer as shown below: 
 
     $ cd ./sync/jms-template
+    $ mvn clean compile
     $ mvn -Pproducer exec:java -DsendType=convertAndSend
 
 Summary
